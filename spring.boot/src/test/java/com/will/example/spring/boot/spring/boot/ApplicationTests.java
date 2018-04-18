@@ -1,9 +1,6 @@
 package com.will.example.spring.boot.spring.boot;
 
-import com.will.example.spring.boot.spring.boot.bean.Foo;
-import com.will.example.spring.boot.spring.boot.bean.Foo2;
-import com.will.example.spring.boot.spring.boot.bean.Foo3;
-import com.will.example.spring.boot.spring.boot.bean.Foo4;
+import com.will.example.spring.boot.spring.boot.bean.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +24,9 @@ public class ApplicationTests {
 	@Resource
 	private Foo4 foo4;
 
+	@Resource
+	private Foo5 foo5;
+
 	@Test
 	public void contextLoads() {
 	}
@@ -37,6 +37,7 @@ public class ApplicationTests {
 		System.out.println(foo2.toString());
 		System.out.println(foo3.toString());
 		System.out.println(foo4.toString());
+		System.out.println(foo5.toString());
 	}
 
 }

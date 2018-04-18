@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--dependency injectoin start-->
+
+    <bean id="foo" class="com.will.example.spring.boot.spring.boot.bean.Foo">
+        <constructor-arg ref="bar"/>
+        <constructor-arg ref="baz"/>
+    </bean>
+
+    <!--Constructor argument type matching-->
+    <!--value只能用于基本类型-->
+    <bean id="foo2" class="com.will.example.spring.boot.spring.boot.bean.Foo2">
+        <constructor-arg type="com.will.example.spring.boot.spring.boot.bean.Bar" ref="bar"/>
+        <constructor-arg type="com.will.example.spring.boot.spring.boot.bean.Baz" ref="baz"/>
+        <constructor-arg type="int" value="200"/>
+        <constructor-arg type="java.lang.String" value="fddfdsfdsf"/>
+    </bean>
+
+    <!--Constructor argument index-->
+    <bean id="foo3" class="com.will.example.spring.boot.spring.boot.bean.Foo3">
+        <constructor-arg index="0" ref="bar"/>
+        <constructor-arg index="1" ref="baz"/>
+        <constructor-arg index="2" value="200"/>
+        <constructor-arg index="3" value="fddfdsfdsf"/>
+    </bean>
+
+    <!--Constructor argument name-->
+    <bean id="foo4" class="com.will.example.spring.boot.spring.boot.bean.Foo4">
+        <constructor-arg name="bar" ref="bar"/>
+        <constructor-arg name="baz" ref="baz"/>
+    </bean>
+
+    <!--Constructor argument name-->
+    <!--好像跟getter方法没关系-->
+    <!--名字可以根据注解改变-->
+    <bean id="foo5" class="com.will.example.spring.boot.spring.boot.bean.Foo5">
+        <constructor-arg name="a" value="1"/>
+        <constructor-arg name="b" value="2"/>
+    </bean>
+
+    <!--一般情况推荐constructor-based方式，这样构造的对象可以是immutable，内部依赖都not null，返回给外部的都是初始化完整的对象-->
+    <!--setter-based方式, 内部依赖到处都要判断非空, 有点没理解-->
+    <!--dependency injectoin end-->
+
+    <bean id = "bar" class="com.will.example.spring.boot.spring.boot.bean.Bar"/>
+    <bean id = "baz" class="com.will.example.spring.boot.spring.boot.bean.Baz"/>
+
+</beans>
