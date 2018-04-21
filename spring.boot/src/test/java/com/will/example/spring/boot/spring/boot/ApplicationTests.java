@@ -27,6 +27,24 @@ public class ApplicationTests {
 	@Resource
 	private Foo5 foo5;
 
+//	@Resource
+//	private Foo6 foo6;
+//
+//	@Resource
+//	private Foo7 foo7;
+
+	@Resource
+	private Foo8 foo8;
+
+	@Resource
+	private Foo10 foo10;
+
+	@Resource
+	private Foo11 foo11;
+
+	@Resource
+	private Foo12 foo12;
+
 	@Test
 	public void contextLoads() {
 	}
@@ -38,6 +56,12 @@ public class ApplicationTests {
 		System.out.println(foo3.toString());
 		System.out.println(foo4.toString());
 		System.out.println(foo5.toString());
+//		System.out.println(foo6.toString());
+//		System.out.println(foo7.toString());
+		System.out.println(foo8.toString());
+		System.out.println(foo10.toString());
+		System.out.println(foo11.toString());
+		System.out.println(foo12.toString());
 	}
 
 }
