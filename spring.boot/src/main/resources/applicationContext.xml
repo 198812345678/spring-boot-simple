@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -113,6 +114,36 @@
             </list>
         </property>
     </bean>
+
+
+    <!--Null and empty string values-->
+    <bean id="foo13" class="com.will.example.spring.boot.spring.boot.bean.Foo13">
+        <property name="str1" value=""/>
+        <property name="str2">
+            <null/>
+        </property>
+        <property name="i1">
+            <null/>
+        </property>
+    </bean>
+
+    <!--XML shortcut with the p-namespace-->
+    <!--这里的bar必须用bar-ref, 因为是引用的其他bean-->
+    <bean id="foo14" class="com.will.example.spring.boot.spring.boot.bean.Foo14" p:str="fds" p:bar-ref="bar"/>
+
+    <!--XML shortcut with the c-namespace-->
+    <bean id="foo15" class="com.will.example.spring.boot.spring.boot.bean.Foo15" c:str="fd" c:bar-ref="bar"/>
+
+    <!--Compound property names-->
+    <!--这里的p参数是不管用的，是不是p参数和property标签有顺序-->
+    <bean id="foo16" class="com.will.example.spring.boot.spring.boot.bean.Foo16" p:bar-ref="bar">
+        <property name="bar" ref="bar"/>
+        <property name="bar.i" value="223"/>
+    </bean>
+
+
+
+    
     <!--一般情况推荐constructor-based方式，这样构造的对象可以是immutable，内部依赖都not null，返回给外部的都是初始化完整的对象-->
     <!--setter-based方式, 内部依赖到处都要判断非空, 有点没理解-->
     <!--dependency injectoin end-->
