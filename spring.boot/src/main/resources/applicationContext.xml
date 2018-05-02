@@ -148,7 +148,7 @@
     <!--setter-based方式, 内部依赖到处都要判断非空, 有点没理解-->
     <!--dependency injectoin end-->
 
-    <bean id="str" class="java.lang.String"/>
+    <bean id="w" class="java.lang.String"/>
     <bean id = "bar" class="com.will.example.spring.boot.spring.boot.bean.Bar"/>
     <bean id = "baz" class="com.will.example.spring.boot.spring.boot.bean.Baz"/>
 
