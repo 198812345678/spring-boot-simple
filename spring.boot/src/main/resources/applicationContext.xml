@@ -128,10 +128,12 @@
     </bean>
 
     <!--XML shortcut with the p-namespace-->
+    <!--instead of nested <property/> elements-->
     <!--这里的bar必须用bar-ref, 因为是引用的其他bean-->
     <bean id="foo14" class="com.will.example.spring.boot.spring.boot.bean.Foo14" p:str="fds" p:bar-ref="bar"/>
 
     <!--XML shortcut with the c-namespace-->
+    <!--configuring the constructor arguments-->
     <bean id="foo15" class="com.will.example.spring.boot.spring.boot.bean.Foo15" c:str="fd" c:bar-ref="bar"/>
 
     <!--Compound property names-->
@@ -141,15 +143,40 @@
         <property name="bar.i" value="223"/>
     </bean>
 
+    <!--Using depends-on-->
+    <!--explicitly force one or more beans to be initialized before the bean using this element is initialized-->
+    <!--depends-on标签可以控制初始化和销毁时机-->
+    <bean id="foo17" class="com.will.example.spring.boot.spring.boot.bean.Foo17" depends-on="bar,baz">
+        <constructor-arg ref="bar"/>
+        <constructor-arg ref="baz"/>
+    </bean>
+
+    <!--Lazy-initialized beans-->
+    <!--如果被singleton依赖，就还是在启动时初始化-->
+    <!--还可以在<beans>标签上配置属性，使得container级别默认懒加载-->
+    <bean id="foo18" class="com.will.example.spring.boot.spring.boot.bean.Foo18" lazy-init="true">
+        <constructor-arg ref="bar"/>
+        <constructor-arg ref="baz"/>
+    </bean>
+    <!--这个bean没有被其他bean依赖，但是还是调用了构造方法-->
+    <bean id="foo19" class="com.will.example.spring.boot.spring.boot.bean.Foo19"/>
 
 
+    <!--Autowiring collaborators-->
+    <!--这里Bar类型有两个bean bar bar2，依赖bar上配置的primary属性，否则会抛异常-->
+    <!--自动注入不能作用在基本类型-->
+    <!--List类型会把所有匹配到的bean都add进去-->
+    <!--Map类型，如果key是Stirng，会把value类型匹配的所有bean put进去，bean的id作为key-->
+    <bean id="foo20" class="com.will.example.spring.boot.spring.boot.bean.Foo20" autowire="byType"/>
     
     <!--一般情况推荐constructor-based方式，这样构造的对象可以是immutable，内部依赖都not null，返回给外部的都是初始化完整的对象-->
     <!--setter-based方式, 内部依赖到处都要判断非空, 有点没理解-->
     <!--dependency injectoin end-->
 
-    <bean id="w" class="java.lang.String"/>
-    <bean id = "bar" class="com.will.example.spring.boot.spring.boot.bean.Bar"/>
+    <bean id="str" class="java.lang.String"/>
+    <bean id = "bar" class="com.will.example.spring.boot.spring.boot.bean.Bar" primary="true"/>
+    <bean id = "bar2" class="com.will.example.spring.boot.spring.boot.bean.Bar"/>
     <bean id = "baz" class="com.will.example.spring.boot.spring.boot.bean.Baz"/>
+    <bean id = "baz2" class="com.will.example.spring.boot.spring.boot.bean.Baz"/>
 
 </beans>
