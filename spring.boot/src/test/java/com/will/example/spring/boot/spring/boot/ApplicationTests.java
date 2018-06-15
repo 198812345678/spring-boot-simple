@@ -70,6 +70,9 @@ public class ApplicationTests {
 	@Resource
 	private Foo20 foo20;
 
+	@Resource
+	private Foo20 foo20_1;
+
 
 	@Test
 	public void contextLoads() {
@@ -95,6 +98,7 @@ public class ApplicationTests {
 		System.out.println(foo17.toString());
 //		System.out.println(foo18.toString());
 		System.out.println(foo20.toString());
+		System.out.println(foo20_1.toString());
 	}
 
 }

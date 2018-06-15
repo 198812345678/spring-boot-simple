@@ -9,11 +9,51 @@ public class Foo20 {
 
     private List<Baz> bazList;
 
-    private String str;
 
     private Map<String, Bar> stringBarMap;
 
     private Map<Bar, String> barStringMap;
+
+    private String str;
+
+    public Foo20() {
+    }
+
+    public Foo20(Bar bar) {
+        this.bar = bar;
+    }
+
+    public Foo20(Bar bar, List<Baz> bazList) {
+        this.bar = bar;
+        this.bazList = bazList;
+    }
+
+    public Foo20(Map<String, Bar> stringBarMap) {
+        this.stringBarMap = stringBarMap;
+    }
+//
+//    public Foo20(List<Baz> bazList) {
+//        this.bazList = bazList;
+//    }
+
+
+//    public Foo20(List<Baz> bazList, Map<String, Bar> stringBarMap) {
+//        this.bazList = bazList;
+//        this.stringBarMap = stringBarMap;
+//    }
+//
+//    public Foo20(Bar bar, List<Baz> bazList, Map<String, Bar> stringBarMap) {
+//        this.bar = bar;
+//        this.bazList = bazList;
+//        this.stringBarMap = stringBarMap;
+//    }
+
+    public Foo20(Bar bar, List<Baz> bazList, Map<String, Bar> stringBarMap, Map<Bar, String> barStringMap) {
+        this.bar = bar;
+        this.bazList = bazList;
+        this.stringBarMap = stringBarMap;
+        this.barStringMap = barStringMap;
+    }
 
     public void setBarStringMap(Map<Bar, String> barStringMap) {
         this.barStringMap = barStringMap;

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--dependency injectoin start-->
+
+    <bean id="foo" class="com.will.example.spring.boot.spring.boot.bean.Foo">
+        <constructor-arg ref="bar"/>
+        <constructor-arg ref="baz"/>
+    </bean>
+
+    <!--Constructor argument type matching-->
+    <!--value只能用于基本类型, 不只是在这个标签里-->
+    <bean id="foo2" class="com.will.example.spring.boot.spring.boot.bean.Foo2">
+        <constructor-arg type="com.will.example.spring.boot.spring.boot.bean.Bar" ref="bar"/>
+        <constructor-arg type="com.will.example.spring.boot.spring.boot.bean.Baz" ref="baz"/>
+        <constructor-arg type="int" value="200"/>
+        <constructor-arg type="java.lang.String" value="fddfdsfdsf"/>
+    </bean>
+
+    <!--Constructor argument index-->
+    <bean id="foo3" class="com.will.example.spring.boot.spring.boot.bean.Foo3">
+        <constructor-arg index="0" ref="bar"/>
+        <constructor-arg index="1" ref="baz"/>
+        <constructor-arg index="2" value="200"/>
+        <constructor-arg index="3" value="fddfdsfdsf"/>
+    </bean>
+
+    <!--Constructor argument name-->
+    <bean id="foo4" class="com.will.example.spring.boot.spring.boot.bean.Foo4">
+        <constructor-arg name="bar" ref="bar"/>
+        <constructor-arg name="baz" ref="baz"/>
+    </bean>
+
+    <!--Constructor argument name-->
+    <!--好像跟getter方法没关系-->
+    <!--名字可以根据注解改变-->
+    <bean id="foo5" class="com.will.example.spring.boot.spring.boot.bean.Foo5">
+        <constructor-arg name="a" value="1"/>
+        <constructor-arg name="b" value="2"/>
+    </bean>
+
+
+    <!--Circular dependencies-->
+    <!--constructor-based 才会产生循环依赖异常-->
+    <!--<bean id="foo6" class="com.will.example.spring.boot.spring.boot.bean.Foo6">-->
+        <!--<constructor-arg name="foo7" ref="foo7"/>-->
+    <!--</bean>-->
+    <!--<bean id="foo7" class="com.will.example.spring.boot.spring.boot.bean.Foo7">-->
+        <!--<constructor-arg name="foo6" ref="foo6"/>-->
+    <!--</bean>-->
+
+
+    <!--必须要有setter方法-->
+    <bean id="foo8" class="com.will.example.spring.boot.spring.boot.bean.Foo8" p:str="fdfsdsfdsf">
+        <property name="properties">
+            <value>
+                key1=value1
+                key2 =value2
+            </value>
+        </property>
+    </bean>
+
+    <!--idref指的是bean id的名字，并检查这个bean是否存在，需要bean的场景用idref是错的-->
+    <bean id="foo10" class="com.will.example.spring.boot.spring.boot.bean.Foo10">
+        <property name="str">
+            <idref bean="bar"/>
+        </property>
+        <!--<property name="bar">-->
+            <!--<idref bean="bar"/>-->
+        <!--</property>-->
+        <!--<property name="baz">-->
+            <!--<idref bean="baz"/>-->
+        <!--</property>-->
+    </bean>
+
+    <!--Collections-->
+    <bean id="foo11" class="com.will.example.spring.boot.spring.boot.bean.Foo11">
+        <property name="barList">
+            <list>
+                <value>fdf</value>
+                <ref bean="str"/>
+            </list>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="key1">value1</prop>
+                <prop key="key2">value2</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--Bean definition inheritance-->
+    <!--Collection merging-->
+    <bean id="abstractBean" abstract="true">
+        <property name="name" value="fdfdfdf"/>
+        <property name="age" value="1"/>
+        <property name="stringList">
+            <list>
+                <value>11111111</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="foo12" class="com.will.example.spring.boot.spring.boot.bean.Foo12"
+        parent="abstractBean">
+        <property name="name" value="2222"/>
+        <property name="stringList">
+            <list merge="true">
+                <value>22222</value>
+                <value>33333</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--Null and empty string values-->
+    <bean id="foo13" class="com.will.example.spring.boot.spring.boot.bean.Foo13">
+        <property name="str1" value=""/>
+        <property name="str2">
+            <null/>
+        </property>
+        <property name="i1">
+            <null/>
+        </property>
+    </bean>
+
+    <!--XML shortcut with the p-namespace-->
+    <!--instead of nested <property/> elements-->
+    <!--这里的bar必须用bar-ref, 因为是引用的其他bean-->
+    <bean id="foo14" class="com.will.example.spring.boot.spring.boot.bean.Foo14" p:str="fds" p:bar-ref="bar"/>
+
+    <!--XML shortcut with the c-namespace-->
+    <!--configuring the constructor arguments-->
+    <bean id="foo15" class="com.will.example.spring.boot.spring.boot.bean.Foo15" c:str="fd" c:bar-ref="bar"/>
+
+    <!--Compound property names-->
+    <!--这里的p参数是不管用的，是不是p参数和property标签有顺序-->
+    <bean id="foo16" class="com.will.example.spring.boot.spring.boot.bean.Foo16" p:bar-ref="bar">
+        <property name="bar" ref="bar"/>
+        <property name="bar.i" value="223"/>
+    </bean>
+
+    <!--Using depends-on-->
+    <!--explicitly force one or more beans to be initialized before the bean using this element is initialized-->
+    <!--depends-on标签可以控制初始化和销毁时机-->
+    <bean id="foo17" class="com.will.example.spring.boot.spring.boot.bean.Foo17" depends-on="bar,baz">
+        <constructor-arg ref="bar"/>
+        <constructor-arg ref="baz"/>
+    </bean>
+
+    <!--Lazy-initialized beans-->
+    <!--如果被singleton依赖，就还是在启动时初始化-->
+    <!--还可以在<beans>标签上配置属性，使得container级别默认懒加载-->
+    <bean id="foo18" class="com.will.example.spring.boot.spring.boot.bean.Foo18" lazy-init="true">
+        <constructor-arg ref="bar"/>
+        <constructor-arg ref="baz"/>
+    </bean>
+    <!--这个bean没有被其他bean依赖，但是还是调用了构造方法-->
+    <bean id="foo19" class="com.will.example.spring.boot.spring.boot.bean.Foo19"/>
+
+
+    <!--Autowiring collaborators-->
+    <!--这里Bar类型有两个bean bar bar2，依赖bar上配置的primary属性，否则会抛异常-->
+    <!--自动注入不能作用在基本类型-->
+    <!--List类型会把所有匹配到的bean都add进去-->
+    <!--Map类型，如果key是Stirng，会把value类型匹配的所有bean put进去，bean的id作为key-->
+    <!--如果整个工程都用这种方式，如果只有一两处使用会令人困惑-->
+    <!--因为是spring决定匹配到哪个bean，所以容器里最终的对象可能不像文档化配置的清晰-->
+    <!--这种注入会被property and constructor-arg这两种注入覆盖-->
+    <bean id="foo20" class="com.will.example.spring.boot.spring.boot.bean.Foo20" autowire="byType"/>
+    <!--constructor 这种类型会选择所有参数都能找到对应bean的构造方法，如果有多个构造方法都满足会选择匹配到参数最多的-->
+    <bean id="foo20_1" class="com.will.example.spring.boot.spring.boot.bean.Foo20" autowire="constructor"/>
+
+    <!--default-autowire-candidates-->
+    <!--这是beans顶级标签的配置，意思是配置在这里的bean才会才会被用作autowire自动装配-->
+
+    <!--autowire-candidate-->
+    <!--这个是bean级别标签的配置，控制某个bean是否可以用来自动装配-->
+
+    <!--一般情况推荐constructor-based方式，这样构造的对象可以是immutable，内部依赖都not null，返回给外部的都是初始化完整的对象-->
+    <!--setter-based方式, 内部依赖到处都要判断非空, 有点没理解-->
+    <!--dependency injectoin end-->
+
+    <bean id="str" class="java.lang.String"/>
+    <bean id = "bar" class="com.will.example.spring.boot.spring.boot.bean.Bar" primary="true"/>
+    <bean id = "bar2" class="com.will.example.spring.boot.spring.boot.bean.Bar"/>
+    <bean id = "baz" class="com.will.example.spring.boot.spring.boot.bean.Baz"/>
+    <bean id = "baz2" class="com.will.example.spring.boot.spring.boot.bean.Baz"/>
+
+</beans>
