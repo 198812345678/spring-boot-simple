@@ -8,6 +8,11 @@ public class FXNewsProvider implements IFXNewsListenerCallable{
     private IFXNewsListener newsListener;
     private IFXNewsPersister newsPersister;
 
+    public FXNewsProvider() {
+        this.newsListener = newsListener = new DowJonesNewsListener();
+        this.newsPersister = newsPersister = new DowJonesNewsPersister();
+    }
+
     public FXNewsProvider(IFXNewsListener newsListener, IFXNewsPersister newsPersister) {
         this.newsListener = newsListener;
         this.newsPersister = newsPersister;
