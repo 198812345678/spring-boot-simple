@@ -34,6 +34,10 @@ public class FXNewsProvider implements IFXNewsListenerCallable{
         this.newsPersister = newsPersister;
     }
 
+    public void getAndPersistNews() {
+
+    }
+
     @Override
     public void injectNewsListener(IFXNewsListener listener) {
         this.newsListener = listener;

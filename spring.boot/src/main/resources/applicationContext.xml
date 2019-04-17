@@ -6,4 +6,5 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <import resource="applicationContext-dependencies.xml"/>
+    <import resource="applicationContext-jiemi.xml"/>
 </beans>
