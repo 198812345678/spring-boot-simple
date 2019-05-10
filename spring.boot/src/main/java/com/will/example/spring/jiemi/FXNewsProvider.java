@@ -35,7 +35,7 @@ public class FXNewsProvider implements IFXNewsListenerCallable{
     }
 
     public void getAndPersistNews() {
-
+        System.out.println(this.getClass().getSimpleName() + "getAndPersistNews");
     }
 
     @Override
