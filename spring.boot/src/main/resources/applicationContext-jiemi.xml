@@ -6,12 +6,71 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-
     <bean id="dowJonesNewsListener" class="com.will.example.spring.jiemi.DowJonesNewsListener"/>
     <bean id="dowJonesNewsPersister" class="com.will.example.spring.jiemi.DowJonesNewsPersister"/>
     <bean id="FXNewsProvider" class="com.will.example.spring.jiemi.FXNewsProvider">
         <constructor-arg index="0" ref="dowJonesNewsListener"/>
         <constructor-arg index="1" ref="dowJonesNewsPersister"/>
+
+        <property name="listenerName">
+            <idref bean="dowJonesNewsListener"/>
+        </property>
     </bean>
 
+    <bean id="outerBean" class="com.will.example.spring.jiemi.ch4.OuterBean">
+        <property name="innerBean">
+            <bean class="com.will.example.spring.jiemi.ch4.InnerBean"/>
+        </property>
+    </bean>
+
+    <bean id="listFieldBean" class="com.will.example.spring.jiemi.ch4.ListFieldBean">
+        <property name="arrayList">
+            <list>
+                <value>"1"</value>
+            </list>
+        </property>
+
+        <property name="stringList">
+            <list>
+                <value>"2"</value>
+            </list>
+        </property>
+
+        <property name="stringCollection">
+            <list>
+                <value>"3"</value>
+            </list>
+        </property>
+
+        <property name="stringSet">
+            <list>
+                <value>"4"</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="FXNewsProviderName" class="java.lang.String"/>
+    <bean id="mapFieldBean" class="com.will.example.spring.jiemi.ch4.MapFieldBean">
+        <property name="strMapStr">
+            <map>
+                <entry key="key1" value="value"/>
+            </map>
+        </property>
+
+        <property name="outerBeanFXNewsProviderMap">
+            <map>
+                <entry key-ref="outerBean" value-ref="FXNewsProvider"/>
+            </map>
+        </property>
+
+        <property name="stringListMap">
+            <map>
+                <entry key="key2">
+                    <list>
+                        <value>"key2"</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
 </beans>

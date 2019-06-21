@@ -23,4 +23,27 @@ public class Ch4Test {
         djNewsProvider.getAndPersistNews();
     }
 
+    @Test
+    public void test3() {
+        DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory();
+        BeanFactory beanFactory = Ch4Util.bindViaXMLFile(beanRegistry);
+        OuterBean outerBean = (OuterBean) beanFactory.getBean("outerBean");
+        outerBean.getInnerBean();
+    }
+
+    @Test
+    public void test4() {
+        DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory();
+        BeanFactory beanFactory = Ch4Util.bindViaXMLFile(beanRegistry);
+        ListFieldBean listFieldBean = (ListFieldBean) beanFactory.getBean("listFieldBean");
+        listFieldBean.getArrayList();
+    }
+
+    @Test
+    public void test5() {
+        DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory();
+        BeanFactory beanFactory = Ch4Util.bindViaXMLFile(beanRegistry);
+        MapFieldBean mapFieldBean = (MapFieldBean) beanFactory.getBean("mapFieldBean");
+        mapFieldBean.getOuterBeanFXNewsProviderMap();
+    }
 }

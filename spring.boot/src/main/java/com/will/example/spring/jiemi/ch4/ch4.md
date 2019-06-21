@@ -15,3 +15,9 @@
 ##### 4.2.2 外部配置文件方式
 * 针对不同的配置文件格式，由不同的BeanDefinitionReader完成配置转化到BeanDefinition、BeanDefinition注册到BeanDefinitionRegistry两步工作，然后得到BeanFactory
 * @see com.will.example.spring.jiemi.ch4.Ch4Test.test2
+
+#### 4.3 BeanFactory的XML之旅 
+* <idref>: 是个String的值，只是bean的名字 @see com.will.example.spring.jiemi.ch4.Ch4Test.test2
+* 内部<bean>: @see com.will.example.spring.jiemi.ch4.Ch4Test.test3
+* <List>: 可以注入任何Collection类型的依赖， @see com.will.example.spring.jiemi.ch4.Ch4Test.test4 当然Set类型也可以用<set>来注入
+* <map>: 也可以注入嵌套的map，<key-ref>是某个bean的id（是要把这个bean作为key），@see com.will.example.spring.jiemi.ch4.Ch4Test.test5
