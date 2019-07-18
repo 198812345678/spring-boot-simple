@@ -46,4 +46,11 @@ public class Ch4Test {
         MapFieldBean mapFieldBean = (MapFieldBean) beanFactory.getBean("mapFieldBean");
         mapFieldBean.getOuterBeanFXNewsProviderMap();
     }
+
+    @Test
+    public void test6() {
+        DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory();
+        BeanFactory beanFactory = Ch4Util.bindViaXMLFile(beanRegistry);
+        ReadSytemInitValueBean readSytemInitValueBean = (ReadSytemInitValueBean) beanFactory.getBean("readSytemInitValueBean");
+    }
 }

@@ -21,3 +21,6 @@
 * 内部<bean>: @see com.will.example.spring.jiemi.ch4.Ch4Test.test3
 * <List>: 可以注入任何Collection类型的依赖， @see com.will.example.spring.jiemi.ch4.Ch4Test.test4 当然Set类型也可以用<set>来注入
 * <map>: 也可以注入嵌套的map，<key-ref>是某个bean的id（是要把这个bean作为key），@see com.will.example.spring.jiemi.ch4.Ch4Test.test5
+* <depends-on>: 当classA并不直接依赖class，但是依赖classB某些操作的结果时使用 @see com.will.example.spring.jiemi.ch4.Ch4Test.test6
+* <autowire>: @see com.will.example.spring.boot.spring.boot.bean.Foo20
+
