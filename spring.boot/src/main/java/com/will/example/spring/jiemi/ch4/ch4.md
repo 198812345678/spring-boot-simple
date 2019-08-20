@@ -24,3 +24,11 @@
 * <depends-on>: 当classA并不直接依赖class，但是依赖classB某些操作的结果时使用 @see com.will.example.spring.jiemi.ch4.Ch4Test.test6
 * <autowire>: @see com.will.example.spring.boot.spring.boot.bean.Foo20
 
+#### 4.3.4 继承?我也会!
+* abstract=true的bean可以没有对应的class定义，所以容器中不会真实存在这个bean
+* 使用场景是多个bean都要注入相同的其它bean，属性名要等于abstract bean中的property name
+* @see com.will.example.spring.jiemi.ch4.Ch4Test.test7
+
+#### 4.3.5 bean 的 scope
+* singleton: 存活期限，直到容器销毁；数量，同一个容器只有一个实例
+* prototype: 每次从容器里获取都是一个新的实例，所以，存活期，程序使用情况而定；数量，多个，每次获取都是新的一个；

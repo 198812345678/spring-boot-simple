@@ -79,4 +79,17 @@
     </bean>
 
     <bean id="sysPropertyIniter" class="com.will.example.spring.jiemi.ch4.SysPropertyIniter" init-method="init"/>
+
+    <bean id="abstractParent" abstract="true">
+        <property name="newsListener">
+            <ref bean="dowJonesNewsListener"></ref>
+        </property>
+    </bean>
+    <bean id="concreteSub" class="com.will.example.spring.jiemi.FXNewsProvider" parent="abstractParent">
+
+    </bean>
+
+    <bean id="singletonBean" class="com.will.example.spring.jiemi.ch4.SingletonBean"/>
+
+    <bean id="prototypeBean" class="com.will.example.spring.jiemi.ch4.PrototypeBean" scope="prototype"/>
 </beans>

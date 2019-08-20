@@ -1,6 +1,7 @@
 package com.will.example.spring.jiemi.ch4;
 
 import com.will.example.spring.jiemi.FXNewsProvider;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -52,5 +53,33 @@ public class Ch4Test {
         DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory();
         BeanFactory beanFactory = Ch4Util.bindViaXMLFile(beanRegistry);
         ReadSytemInitValueBean readSytemInitValueBean = (ReadSytemInitValueBean) beanFactory.getBean("readSytemInitValueBean");
+    }
+
+    @Test
+    public void test7() {
+        DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory();
+        BeanFactory beanFactory = Ch4Util.bindViaXMLFile(beanRegistry);
+        FXNewsProvider fxNewsProvider = (FXNewsProvider) beanFactory.getBean("concreteSub");
+        System.out.println(fxNewsProvider);
+    }
+
+    @Test
+    public void test8() {
+        DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory();
+        BeanFactory beanFactory = Ch4Util.bindViaXMLFile(beanRegistry);
+        SingletonBean singletonBean = (SingletonBean) beanFactory.getBean("singletonBean");
+        for (int i = 0; i < 10; i++) {
+            singletonBean = (SingletonBean) beanFactory.getBean("singletonBean");
+            singletonBean.setStatus(singletonBean.getStatus() + 1);
+        }
+        Assert.assertEquals(10, singletonBean.getStatus());
+
+        PrototypeBean prototypeBean = (PrototypeBean) beanFactory.getBean("prototypeBean");
+        for (int i = 0; i < 10; i++) {
+            prototypeBean = (PrototypeBean) beanFactory.getBean("prototypeBean");
+            prototypeBean.setStatus(prototypeBean.getStatus() + 1);
+        }
+        Assert.assertEquals(1, prototypeBean.getStatus());
+
     }
 }
