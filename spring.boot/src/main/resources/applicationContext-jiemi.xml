@@ -76,6 +76,7 @@
 
     <bean id="readSytemInitValueBean" class="com.will.example.spring.jiemi.ch4.ReadSytemInitValueBean"
           init-method="init" depends-on="sysPropertyIniter">
+        <property name="outerBean" ref="outerBean"/>
     </bean>
 
     <bean id="sysPropertyIniter" class="com.will.example.spring.jiemi.ch4.SysPropertyIniter" init-method="init"/>
