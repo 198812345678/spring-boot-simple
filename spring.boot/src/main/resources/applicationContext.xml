@@ -14,6 +14,9 @@
     <context:annotation-config />
     <context:component-scan base-package="com.will.example.spring" />
 
+    <context:property-placeholder ignore-unresolvable="false" location="classpath:*.properties"/>
+
     <import resource="applicationContext-dependencies.xml"/>
     <import resource="applicationContext-jiemi.xml"/>
+    <import resource="applicationContext-mybatis.xml"/>
 </beans>
